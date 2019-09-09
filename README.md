@@ -214,3 +214,15 @@ function getName() {
 - hoisting works only per-scope
 - function expressions are not hoisted
 - functions are hoisted before variables
+
+### What built-in types does JavaScript have?
+
+- `null`
+- `undefined`
+- `boolean`
+- `number`
+- `string`
+- `object`
+- `symbol` (added in ES6)
+
+All types are primitives except an `object`
