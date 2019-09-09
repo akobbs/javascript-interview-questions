@@ -181,3 +181,36 @@ car.start();
 const Foo = () => {};
 const foo = new Foo(); // TypeError: Foo is not a constructor
 ```
+
+### What is a "hoisting"?
+
+Variable and function declarations are processed before any part your code is executed.
+
+That statement has actually two parts:
+
+```javascript
+var name = "John";
+```
+
+- `var name` - declaration, processed during the compilation phase
+- `a = "John"` - assignment, processed during execution phase
+
+**Example**:
+
+```javascript
+// hoisting: function could be called before declaration
+getName();
+
+function getName() {
+  // hoisting: could be used before variable declaration
+  console.log(name); // undefined
+
+  var name = "John";
+}
+```
+
+**Note**:
+
+- hoisting works only per-scope
+- function expressions are not hoisted
+- functions are hoisted before variables
