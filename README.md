@@ -1,5 +1,7 @@
 # JavaScript Interview Questions
 
+## Theory Section
+
 ### How does the "this" keyword work?
 
 - First step is to find the place where the function was called.
@@ -87,6 +89,8 @@
 **Note**:
 
 Arrow function doesn't have own `this`. It takes it from the outside. More about arrow functions [link to the question about an arrow function]
+
+---
 
 ### What is an arrow function?
 
@@ -182,6 +186,8 @@ const Foo = () => {};
 const foo = new Foo(); // TypeError: Foo is not a constructor
 ```
 
+---
+
 ### What is a "hoisting"?
 
 Variable and function declarations are processed before any part your code is executed.
@@ -215,6 +221,8 @@ function getName() {
 - function expressions are not hoisted
 - functions are hoisted before variables
 
+---
+
 ### What built-in types does JavaScript have?
 
 - `null`
@@ -226,3 +234,33 @@ function getName() {
 - `symbol` (added in ES6)
 
 All types are primitives except an `object`
+
+---
+
+## Practice Section
+
+### What's the output?
+
+```javascript
+typeof null;
+```
+
+- A: `"null"`
+- B: `"object"`
+- C: `"undefined"`
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+##### Answer: B
+
+By specification:
+
+```javascript
+typeof null === "object"; // true
+```
+
+</p>
+</details>
+
+---
