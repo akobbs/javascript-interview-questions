@@ -83,3 +83,101 @@
 
    console.log(getName()); // globalName
    ```
+
+**Note**:
+
+Arrow function doesn't have own `this`. It takes it from the outside. More about arrow functions [link to the question about an arrow function]
+
+### What is an arrow function?
+
+**Syntax**:
+
+```javascript
+// arrow function
+const sum = (a, b) => a + b;
+
+// regular function
+function sum(a, b) {
+  return a + b;
+}
+```
+
+- No `this`
+
+Takes `this` from the outside.
+
+```javascript
+const company = {
+  name: "Awesome",
+  employees: ["John", "Mike", "Joe"],
+
+  printEmployees() {
+    this.employees.forEach(employee => {
+      // "this" = company, is taken from the outside
+      console.log(`${this.name}: ${employee}`);
+    });
+  }
+};
+
+company.printEmployees();
+
+// Output:
+// Awesome: John
+// Awesome: Mike
+// Awesome: Joe
+```
+
+- No `arguments`
+
+Takes from the enclosing scope.
+
+```javascript
+function sum() {
+  // "arguments" of the enclosing scope
+  const helper = () => arguments[0] + arguments[1];
+  return helper();
+}
+
+console.log(sum(2, 3)); // 5
+```
+
+- No `super`
+
+Takes `super` from the outer function.
+
+```javascript
+class Vehicle {
+  start() {
+    console.log("Vehicle: start");
+  }
+}
+
+class Car extends Vehicle {
+  start() {
+    console.log("Insert and turn the key");
+
+    const helper = () => {
+      // takes "super" from the outer function
+      super.start();
+      console.log("Car: started");
+    };
+
+    helper();
+  }
+}
+
+const car = new Car();
+car.start();
+
+// Output:
+// Insert and turn the key
+// Vehicle: start
+// Car: started
+```
+
+- Can't be used with `new`
+
+```javascript
+const Foo = () => {};
+const foo = new Foo(); // TypeError: Foo is not a constructor
+```
