@@ -2,12 +2,12 @@
 
 ### How does the "this" keyword work?
 
-First step is to find the place where the function was called.
-Second step is to check questions from top to the bottom and stop if the rule is applied.
+- First step is to find the place where the function was called.
+- Second step is to check questions from top to the bottom and stop if the rule is applied.
 
 1. Is a function called with `new`?
 
-   Answer: `this` is a newly constructed object
+   **Answer**: `this` is a newly constructed object
 
    ```javascript
    function Person(name) {
@@ -20,7 +20,7 @@ Second step is to check questions from top to the bottom and stop if the rule is
 
 2. Is `call`, `apply` or `bind` was used to call the function?
 
-   Answer: `this` is a specified `thisArg` parameter
+   **Answer**: `this` is a specified `thisArg` parameter
 
    ```javascript
    function getName() {
@@ -41,7 +41,7 @@ Second step is to check questions from top to the bottom and stop if the rule is
 
 3. Is a function called with context object.
 
-   Answer: `this` is a context object
+   **Answer**: `this` is a context object
 
    ```javascript
    function getName() {
@@ -59,7 +59,7 @@ Second step is to check questions from top to the bottom and stop if the rule is
 
 4. Default case:
 
-   Answer in `strict mode`: `this` is an `undefined`
+   **Answer in `strict mode`**: `this` is an `undefined`
 
    ```javascript
    var name = "globalName";
@@ -72,7 +72,7 @@ Second step is to check questions from top to the bottom and stop if the rule is
    console.log(getName()); // TypeError: Cannot read property 'name' of undefined
    ```
 
-   Answer in non-`strict mode`: `this` is an global object
+   **Answer in non-`strict mode`**: `this` is an global object
 
    ```javascript
    var name = "globalName";
