@@ -264,7 +264,7 @@ The rest parameter have to be the last argument in the function.
 
 #### Spread Operator
 
-Allows an iterable (array, string, etc) to expanded in the next places.
+Allows an iterable (array, string, etc) to be expanded in the next places.
 
 ```javascript
 // function call
@@ -278,6 +278,27 @@ const clonedObj = { ...obj };
 ```
 
 `fn.apply(null, args)` is the same as `fn(...args)`
+
+---
+
+### What are the "call" and "apply" functions? "call" vs "apply"?
+
+These methods are used to call a function with a given `this` and arguments.
+
+"call" vs "apply":
+
+- `call()` accepts an argument list, while `apply()` accepts an array of arguments
+
+```javascript
+function getInfo(age, position) {
+  return `${this.name}, ${age}, ${position}`;
+}
+
+const person = { name: "John" };
+
+getInfo.call(person, 34, "JS Developer"); // John, 34, JavaScript Developer
+getInfo.apply(person, [34, "JS Developer"]); // John, 34, JavaScript Developer
+```
 
 ---
 
@@ -296,7 +317,7 @@ typeof null;
 <details><summary><b>Answer</b></summary>
 <p>
 
-##### Answer: B
+#### Answer: B
 
 By specification:
 
