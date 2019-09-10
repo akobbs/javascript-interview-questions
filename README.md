@@ -74,7 +74,7 @@
    console.log(getName()); // TypeError: Cannot read property 'name' of undefined
    ```
 
-   **Answer in non-`strict mode`**: `this` is an global object
+   **Answer in non-`strict mode`**: `this` is a global object
 
    ```javascript
    var name = "globalName";
@@ -323,6 +323,24 @@ car.__proto__.__proto__.__proto__ === Object.prototype; // true
 ```
 
 ![alt text](./images/instanceof.png "instaceof diagram")
+
+**Note**:
+
+`instanceof` behavior could be customized by adding `static` `Symbol.hasInstance` method.
+
+```javascript
+class Person {
+  static [Symbol.hasInstance](value) {
+    if ("name" in value && "age" in value) {
+      return true;
+    }
+
+    return false;
+  }
+}
+
+console.log({ name: "John", age: "29" } instanceof Person); // true
+```
 
 ---
 
