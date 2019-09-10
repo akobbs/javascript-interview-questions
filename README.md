@@ -359,12 +359,44 @@ typeof null;
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: B
+#### Answer: B (`"object"`)
 
 By specification:
 
 ```javascript
 typeof null === "object"; // true
+```
+
+</p>
+</details>
+
+---
+
+### What's the output?
+
+```javascript
+function Person() {}
+
+const person = new Person();
+Person.prototype = {};
+
+console.log(person instanceof Person); // ???
+```
+
+- A: `true`
+- B: `false`
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Answer: B (`false`)
+
+`obj instanceof constructor` checks whether `constructor.prototype` equals to one of the prototypes in the `obj` prototype chain.
+
+The `Person.prototype` was changed after `person` creation, but it doesn't change the `[[Prototype]]` of the created object.
+
+```javascript
+person.__proto__ === Person.prototype; // false
 ```
 
 </p>
