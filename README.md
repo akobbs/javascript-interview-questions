@@ -108,7 +108,9 @@ function sum(a, b) {
 
 - No `this`
 
-Takes `this` from the outside.
+The `this` value of the enclosing lexical scope is used. Arrow functions follow the normal variable lookup rules.
+
+It's better not to use an arrow function as a method.
 
 ```javascript
 const company = {
@@ -133,7 +135,9 @@ company.printEmployees();
 
 - No `arguments`
 
-Takes from the enclosing scope.
+Takes it from the enclosing scope.
+
+Not a big deal as rest parameters could be used alternatively.
 
 ```javascript
 function sum() {
@@ -147,7 +151,7 @@ console.log(sum(2, 3)); // 5
 
 - No `super`
 
-Takes `super` from the outer function.
+Takes it from the enclosing scope.
 
 ```javascript
 class Vehicle {
@@ -184,6 +188,13 @@ car.start();
 ```javascript
 const Foo = () => {};
 const foo = new Foo(); // TypeError: Foo is not a constructor
+```
+
+- No `prototype` property
+
+```javascript
+const Person = () => {};
+console.log(Person.prototype); // undefined
 ```
 
 ---
