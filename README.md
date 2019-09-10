@@ -237,6 +237,50 @@ All types are primitives except an `object`
 
 ---
 
+### What are the rest parameters and spread operators?
+
+#### Rest Parameter
+
+Rest parameter allows us to collect indefinite number of arguments.
+
+```javascript
+function sum(...args) {
+  // args is an array of parameters
+  return args.reduce((previous, current) => previous + current);
+}
+
+console.log(sum(1, 2, 3, 4, 5)); // 15
+```
+
+rest parameters vs "arguments"
+
+- "arguments" is not a real array. `sort`, `filter`, `reduce`, `map` and other array functions couldn't be used with it. Rest parameter is an `Array` instance.
+- Arrow functions don't have "arguments". Rest parameters should be used for them.
+- "arguments" object contains all arguments passed to the function, while the rest parameter contains only the remaining part without parameters with separate names
+
+**Note**:
+
+The rest parameter have to be the last argument in the function.
+
+#### Spread Operator
+
+Allows an iterable (array, string, etc) to expanded in the next places.
+
+```javascript
+// function call
+fn(...iterableObj);
+
+// array
+[...iterableObj, 1, 2];
+
+// object literal
+const clonedObj = { ...obj };
+```
+
+`fn.apply(null, args)` is the same as `fn(...args)`
+
+---
+
 ## Practice Section
 
 ### What's the output?
