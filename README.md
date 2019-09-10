@@ -296,9 +296,33 @@ function getInfo(age, position) {
 
 const person = { name: "John" };
 
-getInfo.call(person, 34, "JS Developer"); // John, 34, JavaScript Developer
-getInfo.apply(person, [34, "JS Developer"]); // John, 34, JavaScript Developer
+getInfo.call(person, 34, "JS Developer"); // John, 34, JS Developer
+getInfo.apply(person, [34, "JS Developer"]); // John, 34, JS Developer
 ```
+
+---
+
+### What is an "instanceof" operator? How does it work?
+
+`obj instanceof constructor` checks whether `constructor.prototype` equals to one of the prototypes in the `obj` prototype chain.
+
+```javascript
+class Vehicle {}
+class Car extends Vehicle {}
+
+const car = new Car();
+
+car instanceof Car; // true
+car instanceof Vehicle; // true
+car instanceof Object; // true
+
+// under the hood
+car.__proto__ === Car.prototype; // true
+car.__proto__.__proto__ === Vehicle.prototype; // true
+car.__proto__.__proto__.__proto__ === Object.prototype; // true
+```
+
+![alt text](./images/instanceof.png "instaceof diagram")
 
 ---
 
