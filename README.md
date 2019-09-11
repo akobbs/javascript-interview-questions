@@ -108,7 +108,7 @@ function sum(a, b) {
 
 - No `this`
 
-The `this` value of the enclosing lexical scope is used. Arrow functions follow the normal variable lookup rules.
+The `this` value of the enclosing lexical scope is used.
 
 It's better not to use an arrow function as a method.
 
@@ -409,6 +409,37 @@ The `Person.prototype` was changed after `person` creation, but it doesn't chang
 ```javascript
 person.__proto__ === Person.prototype; // false
 ```
+
+</p>
+</details>
+
+---
+
+### What's the output?
+
+```javascript
+const person = {
+  name: "John",
+  getName: () => {
+    return this.name;
+  }
+};
+
+console.log(person.getName()); // ???
+```
+
+- A: `John`
+- B: `TypeError`
+- C: `undefined`
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Answer: C (`undefined`)
+
+Arrow functions have no `this`, so value of the enclosing lexical scope is used.
+
+It's a global object (`window`) in that case. But `window` doesn't have name property and returns `undefined`.
 
 </p>
 </details>
