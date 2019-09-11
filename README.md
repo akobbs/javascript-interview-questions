@@ -393,6 +393,24 @@ All functions have internal property `[[Environment]]` with a reference to the `
 
 ---
 
+### What is an `IIFE`?
+
+**Immediately Invoked Function Expression** is a function that runs as soon as it is defined.
+
+The variables within `IIFE` can not be accessed from outside and not polluting the global scope.
+
+```javascript
+(function() {
+  const count = 5;
+
+  console.log(count); // 5
+})();
+
+console.log(count); // ReferenceError: count is not defined
+```
+
+---
+
 ## Practice Section
 
 ### What's the output?
