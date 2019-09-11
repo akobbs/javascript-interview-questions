@@ -355,6 +355,44 @@ console.log({ name: "John", age: "29" } instanceof Person); // true
 
 ---
 
+### What is a closure?
+
+A **closure** is a function that remembers its outer variables and can access them.
+
+```javascript
+function createCounter() {
+  let count = 0;
+  return function() {
+    // takes `count` from the outer lexical environment
+    return count++;
+  };
+}
+
+let firstCounter = createCounter();
+let secondCounter = createCounter();
+
+console.log(firstCounter()); // 0
+console.log(firstCounter()); // 1
+console.log(firstCounter()); // 2
+
+console.log(secondCounter()); // 0
+```
+
+**Lexical Environment**
+
+`Lexical Environment` consists of:
+
+- `Environment Record` (local variables and `this` for the `function environment`)
+- reference to an outer `Lexical Environment`
+
+`Lexical Environment` is created for each function call and evaluated code block (`{ ... }`).
+
+To access a variable the inner `Lexical Environment` is searched first, then the outer one and so on until a variable is found or global environment is reached.
+
+All functions have internal property `[[Environment]]` with a reference to the `Lexical Environment` that the function was closed over (creation place).
+
+---
+
 ## Practice Section
 
 ### What's the output?
@@ -437,9 +475,9 @@ console.log(person.getName()); // ???
 
 #### Answer: C (`undefined`)
 
-Arrow functions have no `this`, so value of the enclosing lexical scope is used.
+Arrow functions have no `this`, so the value of the enclosing lexical scope is used.
 
-It's a global object (`window`) in that case. But `window` doesn't have name property and returns `undefined`.
+It's a global object (`window`) in that case. But the `window` doesn't have `name` property and returns `undefined`.
 
 </p>
 </details>
