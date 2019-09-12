@@ -411,6 +411,34 @@ console.log(count); // ReferenceError: count is not defined
 
 ---
 
+### What is a `bind` function?
+
+The `bind()` method creates a new function that, when called, has its `this` keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+
+```javascript
+const person = {
+  name: "John",
+  getName: function() {
+    return this.name;
+  }
+};
+
+const getName = person.getName;
+// this = undefined in strict mode or
+// this = global object in non-strict mode
+console.log(getName()); // undefined
+
+const boundGetName = getName.bind(person);
+// this = person
+console.log(boundGetName()); // John
+```
+
+**Note**:
+
+- Partial Application could be implemented using `bind` function
+
+---
+
 ## Practice Section
 
 ### What's the output?
