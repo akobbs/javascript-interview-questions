@@ -439,6 +439,51 @@ console.log(boundGetName()); // John
 
 ---
 
+### What is a Partial Application?
+
+The process of fixing a number of arguments to a function, producing another function of smaller arity (number of arguments).
+
+```javascript
+function multiply(x, y) {
+  return x * y;
+}
+
+const double = multiply.bind(null, 2);
+const triple = multiply.bind(null, 3);
+
+console.log(double(4)); // 8
+console.log(triple(3)); // 9
+```
+
+`null` was passed to the `bind` function as `this` argument because we don't use `this` in our `multiply` function. `this` will be equal to:
+
+- `null` in `strict mode`
+- global object in non-`strict mode`
+
+**How to apply some arguments without changing `this`?**
+
+```javascript
+function partial(fn, ...partialArgs) {
+  return function(...args) {
+    return fn.call(this, ...partialArgs, ...args);
+  };
+}
+
+const person = {
+  name: "John",
+  getInfo(company, year) {
+    return `${company}: ${this.name}, ${year}`;
+  }
+};
+
+person.newGetInfo = partial(person.getInfo, "Awesome");
+console.log(person.newGetInfo(2019)); // Awesome: John, 2019
+```
+
+Also, `_.partial` and `_.partialRight` functions could be used from the `lodash` library.
+
+---
+
 ## Practice Section
 
 ### What's the output?
