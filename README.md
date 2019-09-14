@@ -439,7 +439,7 @@ console.log(boundGetName()); // John
 
 ---
 
-### What is a Partial Application?
+### What is a "partial application"?
 
 The process of fixing a number of arguments to a function, producing another function of smaller arity (number of arguments).
 
@@ -481,6 +481,52 @@ console.log(person.newGetInfo(2019)); // Awesome: John, 2019
 ```
 
 Also, `_.partial` and `_.partialRight` functions could be used from the `lodash` library.
+
+---
+
+### What is a "currying"?
+
+**Currying** is the technique of translating the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single argument.
+
+```javascript
+function curry(fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
+    } else {
+      return function(...otherArgs) {
+        return curried.call(this, ...args, ...otherArgs);
+      };
+    }
+  };
+}
+
+function sum(a, b, c) {
+  return a + b + c;
+}
+
+const curriedSum = curry(sum);
+
+// currying by definition
+console.log(curriedSum(1)(2)(3)); // 6
+
+// additional opportunity to use
+console.log(curriedSum(1, 2, 3)); // 6
+console.log(curriedSum(1, 2)(3)); // 6
+console.log(curriedSum(1)(2, 3)); // 6
+```
+
+According to the definition, currying should convert `sum(a, b, c)` to the `sum(a)(b)(c)`.
+
+But most of the time other libraries implement it in a way, that gives an ability to pass multiple arguments at a time as in the example above.
+
+**Partial Application** vs **Currying**:
+
+- partial application can take as many arguments as desired but curried function take one argument at a time
+
+**Note**:
+
+`_.curry` or `_.curryRight` from the `lodash` library could be used to apply **currying** technique.
 
 ---
 
