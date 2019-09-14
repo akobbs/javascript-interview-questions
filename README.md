@@ -201,7 +201,7 @@ console.log(Person.prototype); // undefined
 
 ### What is a "hoisting"?
 
-Variable and function declarations are processed before any part your code is executed.
+Variables (defined with "var") and function declarations are processed before any part your code is executed.
 
 That statement has actually two parts:
 
@@ -522,11 +522,61 @@ But most of the time other libraries implement it in a way, that gives an abilit
 
 **Partial Application** vs **Currying**:
 
-- partial application can take as many arguments as desired but curried function take one argument at a time
+- partial application can take as many arguments as desired but curried function takes one argument at a time
 
 **Note**:
 
 `_.curry` or `_.curryRight` from the `lodash` library could be used to apply **currying** technique.
+
+---
+
+### "var" vs "let" vs "const"?
+
+`const` is the same as `let` without ability to change its value.
+
+- `let` and `const` have block scope but `var` doesn't. Variables, declared with `var` are function-wide or global.
+
+```javascript
+if (true) {
+  var first = true;
+  let second = true;
+}
+
+console.log(first); // true, the variable defined with "var" is accessible outside "if" scope
+console.log(second); // ReferenceError: second is not defined
+```
+
+```javascript
+{
+  var first = true;
+  let second = true;
+}
+
+console.log(first); // true, the variable defined with "var" is accessible outside `{ ... }` scope
+console.log(second); // ReferenceError: second is not defined
+```
+
+```javascript
+// defined with "var"
+for (var firstIdx = 0; firstIdx < 5; firstIdx++) {}
+// defined with "let"
+for (let secondIdx = 0; secondIdx < 5; secondIdx++) {}
+
+console.log(firstIdx); // 5 - visible outside for loop
+console.log(secondIdx); // ReferenceError: secondIdx is not defined
+```
+
+```javascript
+function fn() {
+  // variables defined inside the function are not accessible outside it
+  // no matter what keyword was used to define it ("var", "let" or "const")
+  var message = "some message";
+}
+
+console.log(message); // ReferenceError: message is not defined
+```
+
+- variables defined with "var" are hoisted (see [hoisting](https://github.com/akobbs/javascript-interview-questions#what-is-a-hoisting)), while defined with "let" and "const" are not
 
 ---
 
