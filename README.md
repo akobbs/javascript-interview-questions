@@ -88,7 +88,7 @@
 
 **Note**:
 
-Arrow function doesn't have own `this`. It takes it from the outside. More about arrow functions [link to the question about an arrow function]
+Arrow function doesn't have own `this`. It takes it from the outside. See [arrow functions](https://github.com/akobbs/javascript-interview-questions#what-is-an-arrow-function)
 
 ---
 
