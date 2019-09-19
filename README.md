@@ -670,3 +670,32 @@ It's a global object (`window`) in that case. But the `window` doesn't have `nam
 </details>
 
 ---
+
+### What's the output?
+
+```javascript
+const value = new Boolean(false);
+console.log(!!value); // ???
+```
+
+- A: `false`
+- B: `true`
+- C: `error`
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Answer: B (`true`)
+
+`new Boolean(false)` expression creates an object wrapper for the boolean value and the value of `!!object` is always `true`.
+
+```javascript
+typeof new Boolean(false); // "object"
+
+!!{}; // true
+```
+
+</p>
+</details>
+
+---
