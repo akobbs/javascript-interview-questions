@@ -847,6 +847,18 @@ obj[key] = 13;
 console.log(obj[key] === Object.prototype); // true
 ```
 
+To solve that problem `Object.create(null)` could be used. That expression creates an object without a `[[Prototype]]`.
+
+```javascript
+// obj has no [[Prototype]]
+const obj = Object.create(null);
+
+const key = "__proto__";
+obj[key] = 13;
+
+console.log(obj[key]); // 13
+```
+
 </p>
 </details>
 
