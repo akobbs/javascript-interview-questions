@@ -815,3 +815,39 @@ typeof new Boolean(false); // "object"
 </details>
 
 ---
+
+### What's the output?
+
+```javascript
+const obj = {};
+
+const key = "__proto__";
+obj[key] = 13;
+
+console.log(obj[key]); // ???
+```
+
+- A: `error`
+- B: `[object Object]`
+- C: `13`
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Answer: B (`[object Object]`)
+
+`__proto__` value should be an `object` or `null`. Other values will be ignored. By default the `[[Prototype]]` for an object is an `Object.prototype`.
+
+```javascript
+const obj = {};
+
+const key = "__proto__";
+obj[key] = 13;
+
+console.log(obj[key] === Object.prototype); // true
+```
+
+</p>
+</details>
+
+---
