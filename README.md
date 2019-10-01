@@ -580,6 +580,122 @@ console.log(message); // ReferenceError: message is not defined
 
 ---
 
+### What is a "prototype"?
+
+Objects have a hidden property `[[Prototype]]`, that references another `object` or `null`.
+
+When trying to access a property of an object, the property will not only be sought on the object but on the prototype of the object, the prototype of the prototype, and so on until either a property with a matching name is found or the end of the prototype chain is reached.
+
+#### `[[Prototype]]` vs `Func.prototype`
+
+`Func.prototype` specifies the `[[Prototype]]` to be assigned to the objects created by the `Func` function when it is used a constructor (called with a `new` operator).
+
+The value of the `func.prototype` should be an `object` or `null`.
+
+```javascript
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.getName = function() {
+  return this.name;
+};
+
+// Person.prototype object will be assigned as a [[Prototype]] for a person object
+const person = new Person("John");
+
+// takes getName function from the [[Prototype]] object
+console.log(person.getName()); // John
+```
+
+#### How to set / get a "prototype" of the object?
+
+- `__proto__` is a historical setter / getter for `[[Prototype]]`, which is deprecated now.
+
+```javascript
+const shape = {
+  color: "red"
+};
+
+const circle = {
+  radius: 5
+};
+
+// set the prototype object for the circle
+circle.__proto__ = shape;
+
+// takes from the object
+console.log(circle.radius); // 5
+
+// takes from the prototype object (shape)
+console.log(circle.color); // red
+
+// shape is the prototype of the circle
+console.log(circle.__proto__ === shape); // true
+```
+
+- `Object.getPrototypeOf()` / `Object.setPrototypeOf()`
+
+```javascript
+const shape = {
+  color: "red"
+};
+
+const circle = {
+  radius: 5
+};
+
+// set the prototype object for the circle
+Object.setPrototypeOf(circle, shape);
+
+// takes from the object
+console.log(circle.radius); // 5
+
+// takes from the prototype object (shape)
+console.log(circle.color); // red
+
+// shape is the prototype of the circle
+console.log(Object.getPrototypeOf(circle) === shape); // true
+```
+
+- `Object.create()` creates a new object with specified `[[Prototype]]`
+
+```javascript
+const person = {
+  getName: function() {
+    return this.name;
+  }
+};
+
+// person object will be assigned as a [[Prototype]] for a me object
+const me = Object.create(person);
+me.name = "John";
+
+// takes getName function from the [[Prototype]] object
+console.log(me.getName()); // John
+```
+
+#### Object.prototype
+
+`new Object()` or `{ ... }` has an `Object.prototype` as a `[[Prototype]]`.
+
+All built-in prototypes have `Object.prototype` on the top.
+
+```javascript
+const obj = {};
+
+console.log(obj.__proto__ === Object.prototype); // true
+console.log(obj.__proto__.__proto__); // null
+
+const arr = [1, 2, 3];
+
+console.log(arr.__proto__ === Array.prototype); // true
+console.log(arr.__proto__.__proto__ === Object.prototype); // true
+console.log(arr.__proto__.__proto__.__proto__); // null
+```
+
+---
+
 ## Practice Section
 
 ### What's the output?
